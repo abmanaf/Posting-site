@@ -28,7 +28,7 @@ function SignIn() {
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/components/Login");
     } catch (err) {
-      console.log("user not found");
+      alert("user not found");
     }
   };
   console.log(auth?.currentUser?.email);
@@ -50,12 +50,14 @@ function SignIn() {
           className="email-field"
           placeholder="email"
           type="text"
+          required
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           className="password-field"
           placeholder="password"
           type="password"
+          required
           onChange={(e) => setPassword(e.target.value)}
         />
         <div className="buttons">

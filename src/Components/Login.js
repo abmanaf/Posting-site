@@ -67,7 +67,7 @@ function Login({ movieList, setMovieList }) {
         await deleteDoc(movieDoc);
         await fetchMovieList(); // Update the movie list after deletion
       } else {
-        console.log("You don't have permission to delete this movie.");
+        alert("You don't have permission to delete this movie.");
       }
     } catch (error) {
       console.error("Error deleting movie:", error.message);
@@ -88,7 +88,7 @@ function Login({ movieList, setMovieList }) {
       await updateDoc(movieDoc, { Title: updateMovieTitle });
       fetchMovieList(); // Update the movie list after update
     } else {
-      console.log("You don't have permission to update this movie.");
+      alert("You don't have permission to update this movie.");
     }
   };
   /*
@@ -126,12 +126,14 @@ function Login({ movieList, setMovieList }) {
             className="inputField"
             placeholder="Message topic"
             type="text"
+            required
             onChange={(e) => setNewMovieTitle(e.target.value)}
           />
           <input
             className="inputField"
             placeholder="Type your Message"
             type="text"
+            required
             onChange={(e) => setNewReleasedDate(e.target.value)}
           />
           {/*
@@ -164,6 +166,7 @@ function Login({ movieList, setMovieList }) {
             <input
               className="updateInput"
               placeholder="Update Message topic"
+              required
               onChange={(e) => setUpdateMovieTitle(e.target.value)}
             />
             <button
