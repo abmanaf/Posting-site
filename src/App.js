@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js or your route configuration file
+import { Routes, Route } from "react-router-dom";
+import SignIn from "./Components/SignIn";
+import Login from "./Components/Login";
+import Posts from "./Components/Posts";
+import { useState } from "react";
 
-function App() {
+const App = () => {
+  const [movieList, setMovieList] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<SignIn />} />
+      <Route
+        path="/components/Login"
+        element={<Login movieList={movieList} setMovieList={setMovieList} />}
+      />
+      <Route path="/components/Posts" element={<Posts />} />
+    </Routes>
   );
-}
+};
 
 export default App;

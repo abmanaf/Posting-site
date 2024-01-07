@@ -1,0 +1,76 @@
+.user-profile {
+  width: 300px;
+  height: 350px;
+  margin: 5em auto;
+  padding: 2em;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.sub-user-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.email-field {
+  width: 100%;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+.password-field {
+  width: 100%;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.sign-button {
+  width: 100%;
+  padding: 1em;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sign-button:hover {
+  background-color: #0056b3;
+}
+
+.signIn-google {
+  width: 100%;
+  padding: 1em;
+  background-color: #4285f4;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  transition: background-color 0.3s;
+}
+
+.sign-button:hover {
+  background-color: #3c79d6;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .user-profile {
+    width: 80%;
+  }
+}
