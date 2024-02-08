@@ -2,15 +2,19 @@
 
 .container {
   padding: 20px;
+  justify-content: center;
+  text-align: center;
 }
 
 .formContainer {
   margin-bottom: 20px;
+  margin: 1em;
 }
 
 .inputField {
   margin-right: 10px;
   padding: 8px;
+  width: 10%;
 }
 
 .checkboxLabel {
@@ -22,8 +26,6 @@
 .checkboxLabel input {
   margin-right: 5px;
 }
-
-.postButton,
 .logoutButton {
   background-color: #007bff;
   color: #fff;
@@ -31,26 +33,33 @@
   border: none;
   cursor: pointer;
   margin-right: 10px;
+  float: right;
 }
 
+.postButton {
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+  width: 100%;
+  margin-top: 3em;
+}
+textarea {
+  height: auto;
+}
 .movieListContainer {
   padding: 10px;
 }
 
-.movieItem {
+.postItem {
   margin-bottom: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  padding: 3em 3em;
+  width: 100%;
 }
 
-.movieTitle {
-  color: green;
-}
-
-.updateInput {
-  margin-right: 10px;
-  padding: 8px;
-}
-
-.updateButton,
 .deleteButton {
   background-color: #dc3545;
   color: #fff;
@@ -59,7 +68,23 @@
   cursor: pointer;
   margin-right: 10px;
 }
-
+.post-container {
+  gap: 2em;
+}
+@media only screen and (min-width: 1366px) {
+  .postItem {
+    margin-bottom: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    padding: 3em 3em;
+    width: 30%;
+  }
+  .post-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2em;
+  }
+}
 /* Uncomment the following styles when you decide to implement file upload */
 
 /*
