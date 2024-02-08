@@ -28,7 +28,7 @@ function SignIn() {
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/components/Login");
     } catch (err) {
-      alert("user not found");
+      alert("user not found/Input your credentials");
     }
   };
   console.log(auth?.currentUser?.email);
