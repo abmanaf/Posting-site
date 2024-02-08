@@ -6,14 +6,15 @@ import Posts from "./Components/Posts";
 import { useState } from "react";
 
 const App = () => {
-  const [movieList, setMovieList] = useState([]);
+  //const [movieList, setMovieList] = useState([]);
+  const [post, setPost] = useState([]);
 
   return (
     <Routes>
       <Route path="/" element={<SignIn />} />
       <Route
         path="/components/Login"
-        element={<Login movieList={movieList} setMovieList={setMovieList} />}
+        element={<Login post={post} setPost={setPost} />}
       />
       <Route path="/components/Posts" element={<Posts />} />
     </Routes>
