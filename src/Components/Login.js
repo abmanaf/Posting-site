@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Auth, signOut } from "firebase/auth";
 import { auth, db, storage } from "../Config/firebase";
 import {
@@ -13,51 +14,53 @@ import {
 } from "firebase/firestore";
 import { ref, uploadBytes } from "firebase/storage";
 
-function Login({ movieList, setMovieList }) {
-  const [newMovieTitle, setNewMovieTitle] = useState("");
-  const [newreleaseDate, setNewReleasedDate] = useState("");
+function Login({ post, setPost }) {
+  //const [newMovieTitle, setNewMovieTitle] = useState("");
+  //  const [newmessage, setNewReleasedDate] = useState("");
+
+  const [postTitile, setPostTitile] = useState("");
+  const [newPostMessage, setNewPostMessage] = useState("");
   //const [isNewMovie, setIsnewMovie] = useState(false);
   const navigate = useNavigate();
-  const [updateMovieTitle, setUpdateMovieTitle] = useState([]);
+  //const [updateMovieTitle, setUpdateMovieTitle] = useState([]);
   //const [uploadFile, setUploadFile] = useState(null);
 
-  const moviesCollectionRef = collection(db, "Posts");
-
-  const handleSubmitMovie = async () => {
+  const postCollectionRef = collection(db, "Posts");
+  const handleSubmitPost = async () => {
     try {
-      await addDoc(moviesCollectionRef, {
-        Title: newMovieTitle,
-        releaseDate: newreleaseDate,
+      await addDoc(postCollectionRef, {
+        Title: postTitile,
+        message: newPostMessage,
         //receivedAnBaba: isNewMovie,
         userId: auth?.currentUser?.uid,
       });
-      // Fetch movie list after addition
-      await fetchMovieList();
+      // Fetch p list after addition
+      await fetchpost();
     } catch (err) {
       console.error(err);
       // Handle errors here, e.g., show an alert or log a message
     }
   };
 
-  // Define the fetchMovieList function
-  const fetchMovieList = async () => {
+  // Define the fetchpost function
+  const fetchpost = async () => {
     try {
       console.log("Current User ID:", auth.currentUser?.uid);
-      const data = await getDocs(moviesCollectionRef);
+      const data = await getDocs(postCollectionRef);
       const filtrationOfData = data.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
       }));
-      setMovieList(filtrationOfData);
+      setPost(filtrationOfData);
     } catch (err) {
       console.error(err);
     }
   };
 
   useEffect(() => {
-    // Call fetchMovieList on component mount
-    fetchMovieList();
-  }, [moviesCollectionRef, setMovieList]);
+    // Call fetchpost on component mount
+    fetchpost();
+  }, [postCollectionRef, setPost]);
 
   const handleDelete = async (id, userId) => {
     try {
@@ -65,12 +68,12 @@ function Login({ movieList, setMovieList }) {
       if (auth.currentUser?.uid === userId) {
         const movieDoc = doc(db, "Posts", id);
         await deleteDoc(movieDoc);
-        await fetchMovieList(); // Update the movie list after deletion
+        await fetchpost(); // Update the p list after deletion
       } else {
-        alert("You don't have permission to delete this movie.");
+        alert("Sorry, you don't have permission to delete this.");
       }
     } catch (error) {
-      console.error("Error deleting movie:", error.message);
+      console.error("Error deleting this:", error.message);
     }
   };
 
@@ -78,19 +81,20 @@ function Login({ movieList, setMovieList }) {
   const onHandleUpdate = async (id) => {
     const movieDoc = doc(db, "Movies", id);
     await updateDoc(movieDoc, { Title: updateMovieTitle });
-    fetchMovieList(); // Update the movie list after update
+    fetchpost(); // Update the p list after update
   };
-  */
+  
   const onHandleUpdate = async (id, userId) => {
     // Check if the user has permission to update
     if (auth.currentUser?.uid === userId) {
       const movieDoc = doc(db, "Posts", id);
       await updateDoc(movieDoc, { Title: updateMovieTitle });
-      fetchMovieList(); // Update the movie list after update
+      fetchpost(); // Update the post list after update
     } else {
-      alert("You don't have permission to update this movie.");
+      alert("Sorry you don't have permission to update this.");
     }
   };
+  */
   /*
 
   const handleSubmitFile = async () => {
@@ -119,23 +123,30 @@ function Login({ movieList, setMovieList }) {
 
   return (
     <div className="container">
+      <button className="logoutButton" onClick={LogOut}>
+        Log Out
+      </button>
+      <br />
       <div className="formContainer">
         <br />
         <div>
-          <input
-            className="inputField"
-            placeholder="Message topic"
-            type="text"
-            required
-            onChange={(e) => setNewMovieTitle(e.target.value)}
-          />
-          <input
-            className="inputField"
-            placeholder="Type your Message"
-            type="text"
-            required
-            onChange={(e) => setNewReleasedDate(e.target.value)}
-          />
+          <div className="row">
+            <input
+              className="inputField"
+              placeholder="Message topic"
+              type="text"
+              required
+              onChange={(e) => setPostTitile(e.target.value)}
+            />
+            <br />
+            <textarea
+              className="inputField"
+              placeholder="Type your Message"
+              type="text"
+              required
+              onChange={(e) => setNewPostMessage(e.target.value)}
+            />
+          </div>
           {/*
           <label className="checkboxLabel">
             <input
@@ -146,23 +157,23 @@ function Login({ movieList, setMovieList }) {
             Mark as serious
           </label>
            */}
-          <button className="postButton" onClick={handleSubmitMovie}>
+          <button className="postButton" onClick={handleSubmitPost}>
             Post
-          </button>
-          <button className="logoutButton" onClick={LogOut}>
-            Log Out
           </button>
         </div>
       </div>
-      <div className="movieListContainer">
+      <div className="postContainer">
         <h2 style={{ textTransform: "uppercase" }}>Opinion</h2>
-        {movieList.map((movie) => (
-          <div className="movieItem" key={movie.id}>
-            <h1 className="movieTitle">
-              {/* style={{ color: movie.receivedAnBaba ? "green" : "red" }} */}
-              {movie.Title}
-            </h1>
-            <p>Message: {movie.releaseDate}</p>
+        <br />
+        <div className="post-container">
+          {post.map((p) => (
+            <div className="postItem" key={p.id}>
+              <h1 className="postTitle">
+                {/* style={{ color: p.receivedAnBaba ? "green" : "red" }} */}
+                {p.Title}
+              </h1>
+              <p>Message: {p.message}</p>
+              {/* 
             <input
               className="updateInput"
               placeholder="Update Message topic"
@@ -171,19 +182,20 @@ function Login({ movieList, setMovieList }) {
             />
             <button
               className="updateButton"
-              onClick={() => onHandleUpdate(movie.id, movie.userId)}
+              onClick={() => onHandleUpdate(p.id, p.userId)}
             >
               Update
             </button>
-            <button
-              className="deleteButton"
-              onClick={() => handleDelete(movie.id, movie.userId)}
-            >
-              Delete
-            </button>
-            <hr />
-          </div>
-        ))}
+            */}
+              <button
+                className="deleteButton"
+                onClick={() => handleDelete(p.id, p.userId)}
+              >
+                Delete
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
       <div>
         {/* Uncomment the following when you decide to implement file upload */}
