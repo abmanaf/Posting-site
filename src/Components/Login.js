@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import myPic from "../Asset/blog-site.jpg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Auth, signOut } from "firebase/auth";
 import { auth, db, storage } from "../Config/firebase";
@@ -122,32 +123,44 @@ function Login({ post, setPost }) {
   //console.log(auth?.currentUser?.uid);
 
   return (
-    <div className="container">
-      <button className="logoutButton" onClick={LogOut}>
-        Log Out
-      </button>
-      <br />
-      <div className="formContainer">
-        <br />
-        <div>
-          <div className="row">
-            <input
-              className="inputField"
-              placeholder="Message topic"
-              type="text"
-              required
-              onChange={(e) => setPostTitile(e.target.value)}
-            />
-            <br />
-            <textarea
-              className="inputField"
-              placeholder="Type your Message"
-              type="text"
-              required
-              onChange={(e) => setNewPostMessage(e.target.value)}
-            />
+    <div>
+      <div className="container">
+        <div
+          className="header"
+          style={{ display: "flex", justifyContent: "space-between" }}
+        >
+          <div className="profile">
+            <img src={myPic} alt="" />
+            <span style={{ marginLeft: "10px" }}>Alibaba</span>
           </div>
-          {/*
+          <div>
+            <button className="logoutButton" onClick={LogOut}>
+              Log Out
+            </button>
+          </div>
+        </div>
+        <br />
+        <div className="formContainer">
+          <br />
+          <div>
+            <div className="row">
+              <input
+                className="inputField"
+                placeholder="Message topic"
+                type="text"
+                required
+                onChange={(e) => setPostTitile(e.target.value)}
+              />
+              <br />
+              <textarea
+                className="inputField"
+                placeholder="Type your Message"
+                type="text"
+                required
+                onChange={(e) => setNewPostMessage(e.target.value)}
+              />
+            </div>
+            {/*
           <label className="checkboxLabel">
             <input
               type="checkbox"
@@ -157,23 +170,23 @@ function Login({ post, setPost }) {
             Mark as serious
           </label>
            */}
-          <button className="postButton" onClick={handleSubmitPost}>
-            Post
-          </button>
+            <button className="postButton" onClick={handleSubmitPost}>
+              Post
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="postContainer">
-        <h2 style={{ textTransform: "uppercase" }}>Opinion</h2>
-        <br />
-        <div className="post-container">
-          {post.map((p) => (
-            <div className="postItem" key={p.id}>
-              <h1 className="postTitle">
-                {/* style={{ color: p.receivedAnBaba ? "green" : "red" }} */}
-                {p.Title}
-              </h1>
-              <p>Message: {p.message}</p>
-              {/* 
+        <div className="postContainer">
+          <h2 style={{ textTransform: "uppercase" }}>Opinion</h2>
+          <br />
+          <div className="post-container">
+            {post.map((p) => (
+              <div className="postItem" key={p.id}>
+                <h1 className="postTitle">
+                  {/* style={{ color: p.receivedAnBaba ? "green" : "red" }} */}
+                  {p.Title}
+                </h1>
+                <p>Message: {p.message}</p>
+                {/* 
             <input
               className="updateInput"
               placeholder="Update Message topic"
@@ -187,19 +200,19 @@ function Login({ post, setPost }) {
               Update
             </button>
             */}
-              <button
-                className="deleteButton"
-                onClick={() => handleDelete(p.id, p.userId)}
-              >
-                Delete
-              </button>
-            </div>
-          ))}
+                <button
+                  className="deleteButton"
+                  onClick={() => handleDelete(p.id, p.userId)}
+                >
+                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-      <div>
-        {/* Uncomment the following when you decide to implement file upload */}
-        {/*
+        <div>
+          {/* Uncomment the following when you decide to implement file upload */}
+          {/*
           <input
             className="fileInput"
             type="file"
@@ -209,7 +222,101 @@ function Login({ post, setPost }) {
             Upload File
           </button>
         */}
+        </div>
       </div>
+      <footer class="footer">
+        <div class="footer__addr">
+          <h1 class="footer__logo">Something</h1>
+
+          <h2>Contact</h2>
+
+          <address>
+            223 552 669 950
+            <br />
+            <a class="footer__btn" href="mailto:abdulmanafaliu414@gmail.com">
+              Email Us
+            </a>
+          </address>
+        </div>
+
+        <ul class="footer__nav">
+          <li class="nav__item">
+            <h2 class="nav__title">Media</h2>
+
+            <ul class="nav__ul">
+              <li>
+                <a href="#">Online</a>
+              </li>
+
+              <li>
+                <a href="#">Print</a>
+              </li>
+
+              <li>
+                <a href="#">Alternative Ads</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav__item nav__item--extra">
+            <h2 class="nav__title">Technology</h2>
+
+            <ul class="nav__ul nav__ul--extra">
+              <li>
+                <a href="#">Hardware Design</a>
+              </li>
+
+              <li>
+                <a href="#">Software Design</a>
+              </li>
+
+              <li>
+                <a href="#">Digital Signage</a>
+              </li>
+
+              <li>
+                <a href="#">Automation</a>
+              </li>
+
+              <li>
+                <a href="#">Artificial Intelligence</a>
+              </li>
+
+              <li>
+                <a href="#">IoT</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav__item">
+            <h2 class="nav__title">Legal</h2>
+
+            <ul class="nav__ul">
+              <li>
+                <a href="#">Privacy Policy</a>
+              </li>
+
+              <li>
+                <a href="#">Terms of Use</a>
+              </li>
+
+              <li>
+                <a href="#">Sitemap</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <div class="legal">
+          <p>&copy; 2024 alibabs. All rights reserved.</p>
+
+          <div class="legal__links">
+            <span>
+              Made by Alibaba <span class="heart">♥</span>from Ghana
+            </span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
